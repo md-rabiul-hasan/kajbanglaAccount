@@ -1,0 +1,1 @@
+UPDATE process set medical_status='2',medical_remarks='',previous_status='1',status='M',entry_by_medical='1',entry_dt_medical='' WHERE passport_id='3245698541'

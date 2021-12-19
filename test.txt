@@ -1,0 +1,1 @@
+UPDATE process set status='MX',auth_by='1',auth_dt='2021-10-09' WHERE process_id='1'

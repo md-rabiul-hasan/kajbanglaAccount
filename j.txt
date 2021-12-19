@@ -1,0 +1,1 @@
+{"upload_passenger_img":{"name":"testimonial-3.jpg","type":"image\/jpeg","tmp_name":"G:\\Work\\PHP-7.4\\xampp\\tmp\\phpF506.tmp","error":0,"size":19302},"upload_passport_img":{"name":"testimonial-1.jpg","type":"image\/jpeg","tmp_name":"G:\\Work\\PHP-7.4\\xampp\\tmp\\phpF507.tmp","error":0,"size":14371}}

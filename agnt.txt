@@ -1,0 +1,1 @@
+INSERT INTO `agent_info`( `agent_name`, `agent_mobile`, `agent_email`, `referral_code`, `agent_address`, `agent_img`, `agent_nid_img`, `status`, `entry_by`, `entry_dt`) VALUES ('Z Agent','+8801676415198','hrahman.2k11@gmail.com','AGNT-12232-123323','Dhaka','uploads/agentImage/20211014175636.jpg','uploads/agentNid/20211014175636.jpg','0','1','2021-10-14')

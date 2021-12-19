@@ -1,0 +1,1 @@
+UPDATE `process` SET `fingering`='YES',`training_ceftificate`='YES',`entry_by_t_f`='1',`entry_dt_t_f`='2021-10-09',`status`='TF',`visa_dt`='',`visa_expire_dt`='' WHERE passport_no='123456789'

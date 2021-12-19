@@ -1,0 +1,17 @@
+UPDATE company_info SET
+	 company_id    = '1',
+	 profession    = '3',
+	 purchase_amt  = '11.00',
+	 sales_amt     = '10.00',
+	 office_id     = '1',
+	 salary        = 'Ex id placeat modi',
+	 working_hr    = 'Fugit ut eos offic',
+	 food          = 'Amet harum anim por',
+	 accommodation = 'Sunt provident moll',
+	 age_limit     = 'Officia nihil optio',
+	 ref_code      = 'Nesciunt optio qui',
+	 country       = '2',
+	 status        = '0',
+	 entry_by      = '1',
+	 entry_dt      = '2021-12-20'
+	 WHERE company_info_id = '14'

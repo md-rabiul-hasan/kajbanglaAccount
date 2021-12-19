@@ -1,0 +1,20 @@
+UPDATE passenger SET 
+                    passenger_name     = 'Rabiul Hasan',
+                    passport_no        = 'Duis voluptate sint ',
+                    passport_issue_dt  = '1970-01-01',
+                    passport_expire_dt = '1970-01-01',
+                    father_name        = 'Silas Myers',
+                    mother_name        = 'Zena Donaldson',
+                    date_of_birth      = '1999-09-18',
+                    place_of_birth     = 'Dolore deserunt sit ',
+                    phone_no           = '+1 (636) 107-4192',
+                    email              = 'bexu@mailinator.com',
+                    reference_agent_id = '11',
+                    present_address    = 'Alias irure distinct',
+                    parmanent_address  = 'Magni suscipit proid',
+                    passenger_img      = 'uploads/passengers/20211220011150.jpg',
+                    passport_img       = 'uploads/passports/20211220011150.jpg',
+                    entry_by           = '3',
+                    entry_dt           = '2021-12-20',
+                    status             = 0
+              WHERE passenger_id       = '11'
