@@ -115,7 +115,7 @@
                                     <li <?php if(get_page_name()=='AuthNewPassenger') print 'class="active"';?> ><a href="authNewPassenger">Authorize New Passenger</a></li>
                                
                                 <li <?php if(get_page_name()=='EditNewPassenger') print 'class="active"';?>>
-                                    <a href="editNewPassenger">Edit Passenger Info</a>
+                                    <a href="editNewPassenger">Passanger List</a>
                                 </li>
 
                             </ul>
@@ -132,7 +132,7 @@
                                     <li <?php if(get_page_name()=='AuthNewCompany') print 'class="active"';?> ><a href="authNewCompany">Authorize Company Info</a></li>
                                
                                 <li <?php if(get_page_name()=='EditNewCompany') print 'class="active"';?>>
-                                    <a href="editNewCompany">Edit Company Info</a>
+                                    <a href="editNewCompany">Company List</a>
                                 </li>
 
                             </ul>
@@ -147,7 +147,7 @@
                                     <li <?php if(get_page_name()=='AuthNewAgent') print 'class="active"';?> ><a href="authNewAgent">Authorize New Agent</a></li>
                                
                                 <li <?php if(get_page_name()=='EditNewCompany') print 'class="active"';?>>
-                                    <a href="editNewCompany">Edit Company Info</a>
+                                    <a href="agentList">Agent List</a>
                                 </li>
 
                             </ul>

@@ -120,7 +120,9 @@ $user_id=$_SESSION['user_id'];
                                                 <i class="fa fa-edit text-navy">Edit</i>
                                             </a> 
                                             <br>
-                                            <a href="#" onclick="delteCompany('<?php print $company_info_id; ?>')"><i class="fa fa-trash " style="color:red">Delete</i></a></td>
+                                            <a href="#" onclick="delteCompany('<?php print $company_info_id; ?>')">
+                                            <i class="fa fa-trash " style="color:red">Delete</i></a>
+                                        </td>
                                     </tr>
                                      <?php
                                       }

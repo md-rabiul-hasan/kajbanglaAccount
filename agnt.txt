@@ -1,1 +1,12 @@
-INSERT INTO `agent_info`( `agent_name`, `agent_mobile`, `agent_email`, `referral_code`, `agent_address`, `agent_img`, `agent_nid_img`, `status`, `entry_by`, `entry_dt`) VALUES ('Z Agent','+8801676415198','hrahman.2k11@gmail.com','AGNT-12232-123323','Dhaka','uploads/agentImage/20211014175636.jpg','uploads/agentNid/20211014175636.jpg','0','1','2021-10-14')
+UPDATE agent_info SET 
+      agent_name    = 'Stone Reese',
+      agent_mobile  = '+1 (208) 945-2626',
+      agent_email   = 'hypidana@mailinator.com',
+      referral_code = 'Rem quod qui est fa',
+      agent_address = 'Voluptatum nulla mol',
+      agent_img     = 'uploads/agentImage/20211220173900.jpg',
+      agent_nid_img = 'uploads/agentNid/20211220173900.jpg',
+      status        = '0',
+      entry_by      = '3',
+      entry_dt      = '2021-12-20'
+WHERE agent_id      = 12
