@@ -17,7 +17,7 @@ $user_id=$_SESSION['user_id'];
           <?php include('navbar.php');?>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Agent List</h2>
+                    <h2>Profession Setup</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="dashboard">Home</a>
@@ -26,7 +26,7 @@ $user_id=$_SESSION['user_id'];
                             <a>Parameter Setup</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Agent List</strong>
+                            <strong>Authorize New Profession </strong>
                         </li>
                     </ol>
                 </div>
@@ -39,24 +39,32 @@ $user_id=$_SESSION['user_id'];
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Agent List</h5>
+                            <h5>Unauthorized Profession</h5>
                             
                         </div>
                         <div class="ibox-content">
                             <div class="row">
+                                <!-- <div class="col-sm-5 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
+                                    <option value="0">--Filter--</option>
+                                    <option value="1">Unauthorized</option>
+                                    <option value="2">Authorized</option>
+                                    <option value="3">Declined</option>
+                                </select>
+                                </div> -->
+                               <!--  <div class="col-sm-3">
+                                    <div class="input-group"><input placeholder="Search" type="text" class="form-control form-control-sm"> <span class="input-group-append"> <button type="button" class="btn btn-sm btn-primary">Go!
+                                    </button> </span></div>
+
+                                </div> -->
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
+
+                                       <!--  <th>check</th> -->
                                         <th>SL</th>
-                                        <th>Agent Name </th>
-                                        <th>Agent Ref Code </th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Agent Img</th>
-                                        <th>Agent Nid Img</th>
+                                        <th>Profession Name </th>
                                         <th>Entry By</th>
                                         <th>Entry Date</th>
                                         <th>Action</th>
@@ -64,36 +72,28 @@ $user_id=$_SESSION['user_id'];
                                     </thead>
                                     <tbody>
                                       <?php
-                                      $q=mysqli_query($con,"SELECT *,ai.entry_dt as entry_dt FROM `agent_info` ai  
-                                      left join users usr on ai.entry_by=usr.user_id 
-                                      where ai.status='1' order by ai.agent_id DESC");
-                                      print 
+                                      $q=mysqli_query($con,"SELECT *,ai.entry_dt as entry_dt FROM `profession` ai  
+                                      left join users usr on ai.entry_by=usr.user_id where ai.status='1'  order by ai.profession_id DESC");
+                                     
                                      
                                       $sl=0;
                                       while($d=mysqli_fetch_array($q))
                                       {
                                         $sl++;
-                                        $agent_id=$d['agent_id']
+                                        $profession_id=$d['profession_id']
                                       ?>
                                     <tr>
                                         <!-- <td><input type="checkbox"  class="i-checks" name="input[]"></td> -->
                                         <td><?php print $sl?></td>
-                                        <td><?php print $d['agent_name']?></td>
-                                        <td><?php print $d['referral_code']?></td>
-                                        <td><?php print $d['agent_address']?></td>
-                                        <td><?php print $d['agent_mobile']?></td>
-                                        <td><?php print $d['agent_email']?></td>
-                                        
-                                        <td><button class="btn btn-primary" onclick="ShowImg('<?php print $d['agent_img']?>')">View</button></td>
-                                        <td><button class="btn btn-primary" onclick="ShowImg('<?php print $d['agent_nid_img']?>')">View</button></td>
+                                        <td><?php print $d['profession_name']?></td>
                                         <td><?php print $d['user_name']?></td>
                                         <td><?php print $d['entry_dt']?></td>
                                         <td>
-                                            <a href="editAgentInfo?agent_id=<?php print $agent_id; ?>">
+                                            <a href="editProfession?profession_id=<?php print $profession_id; ?>">
                                                 <i class="fa fa-edit text-navy">Edit</i>
                                             </a> 
                                             <br>
-                                            <a href="#" onclick="deleteAgent('<?php print $agent_id; ?>')">
+                                            <a href="#" onclick="deleteProfession('<?php print $profession_id; ?>')">
                                             <i class="fa fa-trash " style="color:red">Delete</i></a>
                                         </td>
                                     </tr>
@@ -146,14 +146,14 @@ $user_id=$_SESSION['user_id'];
         $('#myModal').modal('show');
         $('#showImg').attr("src", img);
     }
-  function authAgent(agent_id,opt)
+  function authProfession(profession_id,opt)
   {
     
     $.ajax({  
             type: 'POST',  
-            url: 'authAgent', 
+            url: 'authProfession', 
             data: {
-                agent_id : agent_id,
+                profession_id : profession_id,
                 opt:opt
             },
             success: function(response) {
@@ -162,11 +162,11 @@ $user_id=$_SESSION['user_id'];
                  {
                       cuteAlert({
                             type: "success",
-                            title: "New Agents Authorized. ",
+                            title: "New Profession Authorized. ",
                             message: "",
                             buttonText: "Okay"
                           }).then((e)=>{
-                               window.location.replace("authNewAgent");
+                               window.location.replace("authNewProfession");
                               })
                  }
                  else
@@ -174,10 +174,10 @@ $user_id=$_SESSION['user_id'];
                       cuteAlert({
                         type: "error",
                         title: "ERROR",
-                        message: "Agent not Authorized",
+                        message: "Profession not Authorized",
                         buttonText: "Okay"
                       }).then((e)=>{
-                             window.location.replace("authNewAgent");
+                             window.location.replace("authNewProfession");
                           })
                  }
             }
@@ -190,15 +190,14 @@ $user_id=$_SESSION['user_id'];
 
 </script>
 
-
 <script>
-    function deleteAgent(agent_id ){
-        if(confirm("Are you sure? You want to delete this agent information?")){
+    function deleteProfession(profession_id){
+        if(confirm("Are you sure? You want to delete this profession?")){
             $.ajax({  
             type: 'POST',  
-            url: 'deleteAgent', 
+            url: 'deleteProfession', 
             data: {
-                agent_id : agent_id
+                profession_id : profession_id
             },
             success: function(response) {
                 var obj = JSON.parse(response);
@@ -209,7 +208,7 @@ $user_id=$_SESSION['user_id'];
                         message: "",
                         buttonText: "Okay"
                         }).then((e)=>{
-                            window.location.replace("agentList");
+                            window.location.replace("professionList");
                         })
                 }else{
                     cuteAlert({
@@ -218,7 +217,7 @@ $user_id=$_SESSION['user_id'];
                         message: obj.message,
                         buttonText: "Okay"
                       }).then((e)=>{
-                             window.location.replace("agentList");
+                             window.location.replace("professionList");
                         })
                 }
                
@@ -227,7 +226,6 @@ $user_id=$_SESSION['user_id'];
         }
     }
 </script>
-
 
 <?php 
 

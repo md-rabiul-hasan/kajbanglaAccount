@@ -161,8 +161,8 @@
                                 
                                     <li <?php if(get_page_name()=='AuthNewProfession') print 'class="active"';?> ><a href="authNewProfession">Authorize New Profession</a></li>
                                
-                                <li <?php if(get_page_name()=='EditNewCompany') print 'class="active"';?>>
-                                    <a href="editNewCompany">Edit Company Info</a>
+                                <li <?php if(get_page_name()=='professionList') print 'class="active"';?>>
+                                    <a href="professionList">Profession List</a>
                                 </li>
 
                             </ul>
