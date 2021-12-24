@@ -171,8 +171,9 @@
                             <a href="#">Passport<span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 
-                                   <li <?php if(get_page_name()=='PassportPosition') print 'class="active"';?> ><a href="passportPosition">Passport Position</a></li>
-                                <li <?php if(get_page_name()=='AuthNewPassportPosition') print 'class="active"';?> ><a href="authNewPassportPosition">Authorize New Profession</a></li>
+                                    <li <?php if(get_page_name()=='PassportPosition') print 'class="active"';?> ><a href="passportPosition">Passport Position</a></li>
+                                    <li <?php if(get_page_name()=='AuthNewPassportPosition') print 'class="active"';?> ><a href="authNewPassportPosition">Authorize Passport Position</a></li>
+                                    <li <?php if(get_page_name()=='PassportPositionList') print 'class="active"';?> ><a href="PassportPositionList">Passport Position List</a></li>
                                 
                                     <li <?php if(get_page_name()=='AuthNewProfession') print 'class="active"';?> ><a href="authNewProfession">Authorize New Profession</a></li>
                                     <li <?php if(get_page_name()=='PassportReceived') print 'class="active"';?> ><a href="passportReceived">Passport Received</a></li>
@@ -212,8 +213,9 @@
                                     <li <?php if(get_page_name()=='Pcr') print 'class="active"';?> ><a href="pcr">PCR Test</a></li>
                                      <li <?php if(get_page_name()=='PcrEdit') print 'class="active"';?> ><a href="pcrEdit">PCR Test Edit</a></li>
                                     <li <?php if(get_page_name()=='PcrAuth') print 'class="active"';?> ><a href="pcrAuth">Authorize PCR Test</a></li>
-                                <li <?php if(get_page_name()=='Mofa') print 'class="active"';?> ><a href="mofa">Mofa Entry</a></li>
+                                    <li <?php if(get_page_name()=='Mofa') print 'class="active"';?> ><a href="mofa">Mofa Entry</a></li>
                                      <li <?php if(get_page_name()=='MofaAuth') print 'class="active"';?> ><a href="mofaAuth">Authorize Mofa</a></li>
+                                     <li <?php if(get_page_name()=='MofaEdit') print 'class="active"';?> ><a href="mofaEdit">Edit Mofa</a></li>
 
                             </ul>
                         </li>

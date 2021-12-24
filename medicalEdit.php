@@ -130,8 +130,9 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                             </form>
                         </div>
                         <div id="dumpdata"></div>
-                        <div class="" id="showPassengerInfo" style="display: none;">
-                                                    <table>
+                        <div class="col-md-6" id="showPassengerInfo" style="display: none;">
+                        <br>
+                                                    <table class="table table-bordered bg-white">
                                                       <tr>
                                                         <th>Passanger </th>
                                                         <th>Info</th>

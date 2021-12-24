@@ -27,16 +27,16 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
           <?php include('navbar.php');?>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>PCR TEST Edit </h2>
+                    <h2>MOFA Modify </h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="index.html">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a>PCR TEST Edit</a>
+                            <a>MOFA Modify</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>PCR TEST  Edit Form</strong>
+                            <strong>MOFA Modify Form</strong>
                         </li>
                     </ol>
                 </div>
@@ -49,15 +49,12 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>PCR TEST  Edit Info </h5>
+                            <h5>MOFA Modify Info </h5>
                             
                         </div>
 
                         <div class="ibox-content">
                             <form method="get">
-                                 <div class="form-group row">
-                                    
-                                </div>
                                   <div class="form-group row">
                                     <div class="col-sm-12">
                                         <div class="row">
@@ -67,35 +64,25 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                             <div style="color: red;display: none" id="passport_Div1">*Passport Not Found</div>
                                             <input type="hidden" id="passport_check">
                                         </div>
-                                        
-                                         <div class="col-md-4 has-success">
-                                             <input type="text" placeholder="Next PCR Date" class="form-control datepicker" name="pcr_dt" id="pcr_dt" required="" >
-                                            <div style="color: red;display: none" id="pcr_dt_Div">*Next Test Date Can not be empty</div>
-                                            
-                                          
-                                        </div>   
-                                             
-                                            
-                                        </div>
-                                        <br>
-                                         <div class="row">
-                                            
-                                            
-                                            <div class="col-sm-10 row">
-                                                COVID-19:&nbsp;
-                                                <div class="i-checks"><label> <input type="radio" id="positive" value="P" name="pcr" > <i></i>POSITIVE</label></div>
-                                                <div class="i-checks"><label> <input type="radio" id="negetive"  value="N" name="pcr" > <i></i>NEGATIVE</label></div>
-                                                
+                                            <!-- <label class="col-sm-2 col-form-label">Office RL No</label> -->
+                                            <div class="col-md-4 has-success">
+                                                <input type="text" placeholder="Mofa Remakrs" class="form-control" name="mofa_remarks" id="mofa_remarks" required="" >
+                                                 <div style="color: red;display: none" id="mofa_remarks_Div">*Mofa Remakrs Can not be empty</div>
+                                                  
                                             </div>
-                                            
-                                             <br>
-                                             
-                                            
+                                            <div class="col-sm-4">
+                                            <div class="input-group date has-success">                                                
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" placeholder="Mofa Date" class="form-control datepicker" name="mofa_dt" id="mofa_dt" />
+                                                <div style="color: red;display: none" id="mofa_dt_Div">*Mofa Date Can not be empty</div>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <input type="hidden" id="mofa_id" value="mofa_id">
                                
-                                <input type="hidden" name="pcr_id" id="pcr_id">
 
                                 
                                 
@@ -174,10 +161,10 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                         todayHighlight: true,
                         format: 'yyyyy-mm-dd'
                     });
+ });      
 
-
- });   
-function getPassangerInfo(passport)
+        
+    function getPassangerInfo(passport)
     {
         
          $.ajax({  
@@ -191,8 +178,8 @@ function getPassangerInfo(passport)
         success: function(response) {
             if(response!='')
             {
-                getPcrOldData(passport);
-              document.getElementById("showPassengerInfo").style.display = "block";
+                getPassangerOldData(passport);
+                document.getElementById("showPassengerInfo").style.display = "block";
               obj = JSON.parse(response);
               $('#passanger_name_dynamic').html(obj.passenger_name);
               $('#passanger_passport_dynamic').html(obj.passport_no);
@@ -215,24 +202,20 @@ function getPassangerInfo(passport)
     });
     }
 
-    function getPcrOldData(passport){
+
+    function getPassangerOldData(passport){
         $.ajax({  
             type: 'POST',  
-            url: 'getPcrInfo', 
+            url: 'getMofaInfo', 
             data: {
                 passport : passport,
             },
             success: function(response) {
-                console.log(response);
                var obj = JSON.parse(response);
                if(obj.is_found === true){
-                    $("#pcr_dt").val(obj.next_pcr_dt);
-                    $("#pcr_id").val(obj.pcr_id);
-                    if(obj.pcr_test == 'N'){
-                        $("#negetive").attr('checked', true);
-                    }else{
-                        $("#positive").prop("checked", true);
-                    }
+                    $("#mofa_remarks").val(obj.mofa_remakrs);
+                    $("#mofa_dt").val(obj.mofa_dt);
+                    $("#mofa_id").val(obj.mofa_id);
                }
             }
         });
@@ -241,11 +224,14 @@ function getPassangerInfo(passport)
     function submitForm()
 {
     
-    var passport=document.getElementById('passport').value
-   var passport_check= document.getElementById('passport_check').value
+    var passport       = document.getElementById('passport').value
+    var passport_check = document.getElementById('passport_check').value
+    var mofa_remarks   = document.getElementById('mofa_remarks').value
+    var mofa_dt        = document.getElementById('mofa_dt').value
+    var mofa_id        = document.getElementById('mofa_id').value
   
-    var pcr=$('input[name="pcr"]:checked').val();
-    var pcr_dt=document.getElementById('pcr_dt').value
+   
+    
     var errorCheck=0;
    if(passport=='')
    {
@@ -266,28 +252,38 @@ function getPassangerInfo(passport)
             errorCheck++; 
         }
    }
-   if(pcr==0 && pcr_dt=='')
+   if(mofa_remarks=='')
    {
-        document.getElementById("pcr_dt_Div").style.display = "block";
+        document.getElementById("mofa_remarks_Div").style.display = "block";
         errorCheck++;
    }
    else
    {
-        document.getElementById("pcr_dt_Div").style.display = "none";
+
+        document.getElementById("mofa_remarks_Div").style.display = "none";
    }
-    
+   
+    if(mofa_dt=='')
+   {
+        document.getElementById("mofa_dt_Div").style.display = "block";
+        errorCheck++;
+   }
+   else
+   {
+        document.getElementById("mofa_dt_Div").style.display = "none";
+   }
+   
 
 if(errorCheck==0)
 {
         $.ajax({  
         type: 'POST',  
-        url: 'pcrEntryEdit', 
+        url: 'mofaUpdate', 
         data: {
-            passport : passport,
-            pcr : pcr,
-            pcr_dt : pcr_dt
-            
-            
+            passport    : passport,
+            mofa_remarks: mofa_remarks,
+            mofa_dt     : mofa_dt,
+            mofa_id     : mofa_id
             
         },
         success: function(response) {
@@ -295,37 +291,23 @@ if(errorCheck==0)
            {
                 cuteAlert({
                       type: "success",
-                      title: "New Entry Registered. ",
-                      message: "Please Authorize the new PCR Entry",
+                      title: "Mofa Update. ",
+                      message: "Please Authorize the updated MOFA",
                       buttonText: "Okay"
                     }).then((e)=>{
-                         window.location.replace("pcr");
+                         window.location.replace("mofa");
                         })
            }
            else
            {
-                if(response==5)
-                {
-                        cuteAlert({
-                          type: "error",
-                          title: "ERROR",
-                          message: "Visa Not Completed Yet",
-                          buttonText: "Okay"
-                        }).then((e)=>{
-                               window.location.replace("pcr");
-                            })
-                }
-                else
-                {
-                        cuteAlert({
-                      type: "error",
-                      title: "ERROR",
-                      message: "PCR Entry not Registered",
-                      buttonText: "Okay"
-                    }).then((e)=>{
-                           window.location.replace("pcr");
-                        })
-                }
+                cuteAlert({
+                  type: "error",
+                  title: "ERROR",
+                  message: "MOFA Update failed",
+                  buttonText: "Okay"
+                }).then((e)=>{
+                       window.location.replace("mofa");
+                    })
            }
           
         }

@@ -1,9 +1,4 @@
-<div class="footer">
-            
-            <div>
-                <strong>Copyright</strong> KajBangla &copy; 2020-<?php print date('Y');?>
-            </div>
-        </div>
+
 
         </div>
         

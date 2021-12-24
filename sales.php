@@ -136,8 +136,9 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                             </form>
                         </div>
                         <div id="dumpdata"></div>
-                        <div class="" id="showPassengerInfo" style="display: none;">
-                                                    <table>
+                        <div class="col-md-6" id="showPassengerInfo" style="display: none;">
+                        <br>
+                                                    <table class="table table-bordered bg-white">
                                                       <tr>
                                                         <th>Passanger </th>
                                                         <th>Info</th>
@@ -187,6 +188,7 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
 <script src="js/plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
+      $("#register").hide();
                     // $(".select2").select2({
                     //     theme: 'bootstrap4',
                     // });
@@ -276,6 +278,7 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
         success: function(response) {
             if(response!='')
             {
+                $("#register").show();
               document.getElementById("showPassengerInfo").style.display = "block";
               obj = JSON.parse(response);
               $('#passanger_name_dynamic').html(obj.passenger_name);

@@ -17,16 +17,16 @@ $user_id=$_SESSION['user_id'];
           <?php include('navbar.php');?>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>GL Setup</h2>
+                    <h2>Passport Setup</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="dashboard">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a>Parameter Setup</a>
+                            <a>Passport</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Authorize Medical </strong>
+                            <strong>Passport Position List</strong>
                         </li>
                     </ol>
                 </div>
@@ -39,7 +39,7 @@ $user_id=$_SESSION['user_id'];
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Unauthorized Medical</h5>
+                            <h5>Authorized Passport Position List</h5>
                             
                         </div>
                         <div class="ibox-content">
@@ -66,10 +66,11 @@ $user_id=$_SESSION['user_id'];
                                         <th>SL</th>
                                         <th>Passport</th>
                                         <th>Passanger Name </th>
-                                        <th>Medical Center</th>
-                                        <th>Medical Date</th>
-                                        <th>Status</th>
-                                        <th>Country</th>
+                                        <th>Bearer</th>
+                                        <th>Submission Date</th>
+                                        <th>Office</th>
+                                        <th>Documents</th>
+                                        <th>Remarks</th>
                                         <th>Entry By</th>
                                         <th>Entry Date</th>
                                         <th>Action</th>
@@ -77,32 +78,47 @@ $user_id=$_SESSION['user_id'];
                                     </thead>
                                     <tbody>
                                       <?php
-                                      $q=mysqli_query($con,"SELECT *,pr.passport_no as passport_no,pr.entry_dt_medical as entry_dt 
-                                      FROM `medical` pr left join medical_status ms on pr.medical_status=ms.medical_status_id 
+                                      $q=mysqli_query($con,"SELECT *,pr.passport_no as passport_no,pr.entry_dt_pos as entry_dt FROM `passport_position` pr 
                                       left join passenger pa on pr.passport_no=pa.passport_no 
-                                      left join users ur on pr.entry_by_medical=ur.user_id 
-                                      left join medical_country cnt on cnt.country_id=pr.medical_country 
-                                      where pr.status='0' and pr.entry_by_medical<>'$user_id' order by medical_id DESC");
+                                      left join users ur on pr.entry_by_pos=ur.user_id 
+                                      where pr.status='1' order by position_id DESC");
                                      
                                       $sl=0;
                                       while($d=mysqli_fetch_array($q))
                                       {
                                         $sl++;
-                                        $process_id=$d['medical_id']
+                                        $process_id=$d['position_id']
                                       ?>
                                     <tr>
                                         <!-- <td><input type="checkbox"  class="i-checks" name="input[]"></td> -->
                                         <td><?php print $sl?></td>
                                         <td><?php print $d['passport_no']?></td>
                                         <td><?php print $d['passenger_name']?></td>
-                                        <td><?php print $d['medical_center']?></td>
-                                        <td><?php print $d['medical_dt']?></td>
-                                        <td><?php print $d['status_name']?></td>
-                                        <td><?php print $d['country_name']?></td>
+                                        <td><?php print $d['bearer_name']?></td>
+                                        <td><?php print $d['sub_dt']?></td>
+                                        <td><?php print $d['office']?></td>
+                                        <td><?php
+
+                                         $doc=$d['doc'];
+                                         $docArray=explode(",", $doc);
+                                         foreach ($docArray as $key => $value) {
+                                            $sl=$key+1;
+                                             print "<p><button class='btn btn-primary'>$value</button></p>";
+                                         }
+
+
+                                     ?></td>
+                                        <td><?php print $d['remarks']?></td>
                                         <td><?php print $d['user_name']?></td>
-                                        <td><?php print$d['entry_dt']?></td>
-                                        
-                                        <td><a href="#" onclick="authMedical('<?php print $process_id; ?>','1')"><i class="fa fa-check text-navy"> Authorize</i></a> <hr><a href="#" onclick="authMedical('<?php print $process_id; ?>','0')"><i class="fa fa-close " style="color:red"> Decline</i></a></td>
+                                        <td><?php print$d['entry_dt']?></td>  
+                                        <td>
+                                            <a href="editPassportPosition?position_id=<?php print $process_id; ?>">
+                                                <i class="fa fa-edit text-navy">Edit</i>
+                                            </a> 
+                                            <br>
+                                            <a href="#" onclick="deletePassportPosition('<?php print $process_id; ?>')">
+                                            <i class="fa fa-trash " style="color:red">Delete</i></a>
+                                        </td>                                      
                                     </tr>
                                      <?php
                                       }
@@ -120,12 +136,12 @@ $user_id=$_SESSION['user_id'];
 
 <script type="text/javascript">
 
-  function authMedical(process_id,opt)
+  function authPass(process_id,opt)
   {
     
     $.ajax({  
             type: 'POST',  
-            url: 'authMedical', 
+            url: 'authpassportPosition', 
             data: {
                 process_id : process_id,
                 opt:opt
@@ -136,11 +152,11 @@ $user_id=$_SESSION['user_id'];
                  {
                       cuteAlert({
                             type: "success",
-                            title: "Medical Authorized. ",
+                            title: "Passport Position Authorized. ",
                             message: "",
                             buttonText: "Okay"
                           }).then((e)=>{
-                               window.location.replace("medicalAuth");
+                               window.location.replace("authNewPassportPosition");
                               })
                  }
                  else if(response==2)
@@ -148,10 +164,10 @@ $user_id=$_SESSION['user_id'];
                       cuteAlert({
                         type: "error",
                         title: "success",
-                        message: "Medical Authorization Declined",
+                        message: "Passport Position Authorization Declined",
                         buttonText: "Okay"
                       }).then((e)=>{
-                             window.location.replace("medicalAuth");
+                             window.location.replace("authNewPassportPosition");
                           })
                  }
                   else
@@ -159,10 +175,10 @@ $user_id=$_SESSION['user_id'];
                       cuteAlert({
                         type: "error",
                         title: "ERROR",
-                        message: "Medical not Authorized",
+                        message: "Passport Position not Authorized",
                         buttonText: "Okay"
                       }).then((e)=>{
-                             window.location.replace("medicalAuth");
+                             window.location.replace("authNewPassportPosition");
                           })
                  }
             }
@@ -174,7 +190,42 @@ $user_id=$_SESSION['user_id'];
    
 
 </script>
-
+<script>
+    function deletePassportPosition(position_id ){
+        if(confirm("Are you sure? You want to delete this passport position information?")){
+            $.ajax({  
+            type: 'POST',  
+            url: 'deletePassportPosition', 
+            data: {
+                position_id : position_id
+            },
+            success: function(response) {
+                var obj = JSON.parse(response);
+                if(obj.success === true){
+                    cuteAlert({
+                        type: "success",
+                        title: obj.message,
+                        message: "",
+                        buttonText: "Okay"
+                        }).then((e)=>{
+                            window.location.replace("PassportPositionList");
+                        })
+                }else{
+                    cuteAlert({
+                        type: "error",
+                        title: "ERROR",
+                        message: obj.message,
+                        buttonText: "Okay"
+                      }).then((e)=>{
+                             window.location.replace("PassportPositionList");
+                        })
+                }
+               
+            }
+        });
+        }
+    }
+</script>
 <?php 
 
 include('footer.php');
