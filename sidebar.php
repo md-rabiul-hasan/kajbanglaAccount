@@ -203,7 +203,8 @@
 
                                    <li <?php if(get_page_name()=='Training') print 'class="active"';?> ><a href     = "training">Training+Finger</a></li>
                                    <li <?php if(get_page_name()=='TrainingAuth') print 'class="active"';?>><a href  = "trainingAuth">Authorize Training+Finger</a></li>
-                                   <li <?php if(get_page_name()=='TrainingEdit') print 'class="active"';?>><a href  = "trainingEdit">Edit Training+Finger</a></li>
+                                   <li <?php if(get_page_name()=='trainingList') print 'class="active"';?>><a href  = "trainingList">Training+Finger List</a></li>
+                                   
                                    <li <?php if(get_page_name()=='ManPower') print 'class="active"';?> ><a href     = "manPower">Man Power</a></li>
                                    <li <?php if(get_page_name()=='ManPowerAuth') print 'class="active"';?> ><a href = "manPowerAuth">Authorize Man Power</a></li>
                                    <li <?php if(get_page_name()=='Vaccine') print 'class="active"';?> ><a href      = "vaccine">Vaccine</a></li>
