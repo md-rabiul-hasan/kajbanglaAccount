@@ -192,11 +192,15 @@
                                    <li <?php if(get_page_name()=='MedicalEdit') print 'class="active"';?> ><a href  = "medicalEdit">Edit Medical</a></li>
                                    <li <?php if(get_page_name()=='Sales') print 'class="active"';?> ><a href        = "sales">Sales</a></li>
                                    <li <?php if(get_page_name()=='SalesAuth') print 'class="active"';?> ><a href    = "salesAuth">Authorize Sales</a></li>
+
                                    <li <?php if(get_page_name()=='Pc') print 'class="active"';?>><a href            = "pc">Police Clearance</a>
                                    <li <?php if(get_page_name()=='PcAuth') print 'class="active"';?>><a href        = "pcAuth">Authorize Police Clearance</a></li>
                                    <li <?php if(get_page_name()=='PcList') print 'class="active"';?>><a href        = "PcList">Police Clearance List</a></li>
+
                                    <li <?php if(get_page_name()=='Visa') print 'class="active"';?> ><a href         = "visa">Visa Process</a></li>
                                    <li <?php if(get_page_name()=='VisaAuth') print 'class="active"';?>><a href      = "visaAuth">Authorize Visa</a>
+                                   <li <?php if(get_page_name()=='VisaList') print 'class="active"';?>><a href      = "VisaList">Visa List</a>
+
                                    <li <?php if(get_page_name()=='Training') print 'class="active"';?> ><a href     = "training">Training+Finger</a></li>
                                    <li <?php if(get_page_name()=='TrainingAuth') print 'class="active"';?>><a href  = "trainingAuth">Authorize Training+Finger</a></li>
                                    <li <?php if(get_page_name()=='TrainingEdit') print 'class="active"';?>><a href  = "trainingEdit">Edit Training+Finger</a></li>
