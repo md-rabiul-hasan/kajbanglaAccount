@@ -1,7 +1,9 @@
-UPDATE pc SET 
-          passport_no = '3245698541',
-          police_c_no = 'Nazrul',
-          entry_by_pc = '3',
-          entry_dt_pc = '2021-12-25',
-          status      = '0'
-    where pc_id       = '1'
+UPDATE vaccine SET 
+                  passport_no     = '1234',
+                  vaccine_1_dt    = '2021-12-10',
+                  vaccine_2_dt    = '2021-12-30',
+                  vaccine_remarks = 'Sed atque sequi beat',
+                  status          = '0',
+                  entry_by_vac    = '3',
+                  entry_dt_vac    = '2021-12-25'
+            WHERE vaccine_id      = '3'

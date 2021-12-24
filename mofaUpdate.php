@@ -10,6 +10,7 @@ if(isset($_POST['passport']) and isset($_POST['mofa_remarks']) and isset($_POST[
 	$mofa_id      = $_POST['mofa_id'];
 	$mofa_dt      = date("Y-m-d",strtotime($_POST['mofa_dt']));
 
+
     $sql = "UPDATE mofa SET 
           passport_no   = '$passport',
           mofa_dt       = '$mofa_dt',

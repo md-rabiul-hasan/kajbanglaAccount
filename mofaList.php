@@ -17,16 +17,16 @@ $user_id=$_SESSION['user_id'];
           <?php include('navbar.php');?>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Authorize</h2>
+                    <h2>MOFA List</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="dashboard">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a>Parameter Setup</a>
+                            <a>MOFA List</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Authorize Sales </strong>
+                            <strong>MOFA List</strong>
                         </li>
                     </ol>
                 </div>
@@ -39,7 +39,7 @@ $user_id=$_SESSION['user_id'];
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Unauthorized Sales</h5>
+                            <h5>MOFA List</h5>
                             
                         </div>
                         <div class="ibox-content">
@@ -66,10 +66,9 @@ $user_id=$_SESSION['user_id'];
                                         <th>SL</th>
                                         <th>Passport</th>
                                         <th>Passanger Name </th>
-                                        <th>Company Name</th>
-                                        <th>Profession</th>
-                                        <th>Purchase Amount</th>
-                                        <th>Selling Amount</th>
+                                        <th>MOFA Date</th>
+                                        <th>MOFA Remarks</th>
+                                        
                                         <th>Entry By</th>
                                         <th>Entry Date</th>
                                         <th>Action</th>
@@ -77,41 +76,37 @@ $user_id=$_SESSION['user_id'];
                                     </thead>
                                     <tbody>
                                       <?php
-                                      $q=mysqli_query($con,"select *,s.passport_no as passport_no,s.sale_amt as sale_amt,s.purchase_amt as purchase_amt from sales s 
-                                      left join company cmp on cmp.company_id=s.company_id left join company_info cmpi on s.company_id=cmpi.company_id 
-                                      left join passenger p on s.passport_no=p.passport_no left join users u on u.user_id=s.entry_by_sale 
-                                      left join profession prf on s.profession=prf.profession_id
-                                       where s.status='0' and s.entry_by_sale<>'$user_id' group by sale_id ");
+                                      $q=mysqli_query($con,"SELECT *,pr.passport_no as passport_no,pr.entry_dt_mofa as entry_dt FROM `mofa` pr  
+                                      left join passenger pa on pr.passport_no=pa.passport_no 
+                                      left join users ur on pr.entry_by_mofa=ur.user_id  
+                                      where pr.status='1' order by mofa_id DESC");
+                                     
                                       $sl=0;
                                       while($d=mysqli_fetch_array($q))
                                       {
                                         $sl++;
-                                        $process_id=$d['sale_id'];
-                                        $process_sale=$d['sale_amt'];
-                                        $comp_sale=$d['sales_amt'];
-                                        if($process_sale==$comp_sale)
-                                        {
-                                            $sale=$process_sale;
-                                        }
-                                        else
-                                        {
-                                            $sale=$process_sale."(".$comp_sale.")";
-                                        }
+                                        $process_id=$d['mofa_id']
                                       ?>
                                     <tr>
                                         <!-- <td><input type="checkbox"  class="i-checks" name="input[]"></td> -->
                                         <td><?php print $sl?></td>
                                         <td><?php print $d['passport_no']?></td>
                                         <td><?php print $d['passenger_name']?></td>
-                                        <td><?php print $d['company_name']?></td>
-                                        <td><?php print $d['profession_name']?></td>
-                                        <td><?php print $d['purchase_amt']?></td>
-                                        <td><?php print $sale?></td>
+                                        <td><?php print $d['mofa_dt']?></td>
+                                        <td><?php print $d['mofa_remakrs']?></td>
+                                        
                                         <td><?php print $d['user_name']?></td>
                                         <td><?php print$d['entry_dt']?></td>
-                                        
-                                        <td><a href="#" onclick="authSales('<?php print $process_id; ?>','1')"><i class="fa fa-check text-navy"> Authorize</i></a> <hr><a href="#" onclick="authSales('<?php print $process_id; ?>','0')"><i class="fa fa-close " style="color:red"> Decline</i></a></td>
-                                    </tr>
+
+                                        <td>
+                                            <a href="editMofa?mofa_id=<?php print $process_id; ?>">
+                                                <i class="fa fa-edit text-navy">Edit</i>
+                                            </a> 
+                                            <br>
+                                            <a href="#" onclick="deleteMofa('<?php print $process_id; ?>')">
+                                            <i class="fa fa-trash " style="color:red">Delete</i></a>
+                                        </td>
+                                       </tr>
                                      <?php
                                       }
                                       ?>
@@ -128,12 +123,12 @@ $user_id=$_SESSION['user_id'];
 
 <script type="text/javascript">
 
-  function authSales(process_id,opt)
+  function authMofa(process_id,opt)
   {
     
     $.ajax({  
             type: 'POST',  
-            url: 'authSales', 
+            url: 'authMofa', 
             data: {
                 process_id : process_id,
                 opt:opt
@@ -144,11 +139,11 @@ $user_id=$_SESSION['user_id'];
                  {
                       cuteAlert({
                             type: "success",
-                            title: "Sales Authorized. ",
+                            title: "MOFA Authorized. ",
                             message: "",
                             buttonText: "Okay"
                           }).then((e)=>{
-                               window.location.replace("salesAuth");
+                               window.location.replace("mofaAuth");
                               })
                  }
                  else if(response==2)
@@ -156,10 +151,10 @@ $user_id=$_SESSION['user_id'];
                       cuteAlert({
                         type: "error",
                         title: "success",
-                        message: "Sales Authorization Declined",
+                        message: "MOFA Authorization Declined",
                         buttonText: "Okay"
                       }).then((e)=>{
-                             window.location.replace("salesAuth");
+                             window.location.replace("mofaAuth");
                           })
                  }
                   else
@@ -167,10 +162,10 @@ $user_id=$_SESSION['user_id'];
                       cuteAlert({
                         type: "error",
                         title: "ERROR",
-                        message: "Sales not Authorized",
+                        message: "MOFA not Authorized",
                         buttonText: "Okay"
                       }).then((e)=>{
-                             window.location.replace("medicalAuth");
+                             window.location.replace("mofaAuth");
                           })
                  }
             }
@@ -182,6 +177,45 @@ $user_id=$_SESSION['user_id'];
    
 
 </script>
+
+
+<script>
+    function deleteMofa(mofa_id ){
+        if(confirm("Are you sure? You want to delete this mofa information?")){
+            $.ajax({  
+            type: 'POST',  
+            url: 'deleteMofa', 
+            data: {
+                mofa_id : mofa_id
+            },
+            success: function(response) {
+                var obj = JSON.parse(response);
+                if(obj.success === true){
+                    cuteAlert({
+                        type: "success",
+                        title: obj.message,
+                        message: "",
+                        buttonText: "Okay"
+                        }).then((e)=>{
+                            window.location.replace("agentList");
+                        })
+                }else{
+                    cuteAlert({
+                        type: "error",
+                        title: "ERROR",
+                        message: obj.message,
+                        buttonText: "Okay"
+                      }).then((e)=>{
+                             window.location.replace("agentList");
+                        })
+                }
+               
+            }
+        });
+        }
+    }
+</script>
+
 
 <?php 
 

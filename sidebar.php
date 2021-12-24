@@ -190,8 +190,10 @@
                                    <li <?php if(get_page_name()=='Medical') print 'class="active"';?> ><a href      = "medical">Medical</a></li>
                                    <li <?php if(get_page_name()=='MedicalAuth') print 'class="active"';?> ><a href  = "medicalAuth">Authorize Medical</a></li>
                                    <li <?php if(get_page_name()=='MedicalEdit') print 'class="active"';?> ><a href  = "medicalEdit">Edit Medical</a></li>
+                                   
                                    <li <?php if(get_page_name()=='Sales') print 'class="active"';?> ><a href        = "sales">Sales</a></li>
                                    <li <?php if(get_page_name()=='SalesAuth') print 'class="active"';?> ><a href    = "salesAuth">Authorize Sales</a></li>
+                                   <li <?php if(get_page_name()=='SalesList') print 'class="active"';?> ><a href    = "salesList">Sales List</a></li>
 
                                    <li <?php if(get_page_name()=='Pc') print 'class="active"';?>><a href            = "pc">Police Clearance</a>
                                    <li <?php if(get_page_name()=='PcAuth') print 'class="active"';?>><a href        = "pcAuth">Authorize Police Clearance</a></li>
@@ -210,16 +212,20 @@
                                    <li <?php if(get_page_name()=='manPowerList') print 'class="active"';?> ><a href = "manPowerList">Man Power List</a></li>
                                    
                                    <li <?php if(get_page_name()=='Vaccine') print 'class="active"';?> ><a href      = "vaccine">Vaccine</a></li>
-                                   <li <?php if(get_page_name()=='VaccineEdit') print 'class="active"';?> ><a href  = "vaccineEdit">Vaccine Edit</a></li>
                                    <li <?php if(get_page_name()=='VaccineAuth') print 'class="active"';?> ><a href  = "vaccineAuth">Authorize Vaccine</a></li>
+                                   <li <?php if(get_page_name()=='VaccineList') print 'class="active"';?> ><a href  = "vaccineList">Vaccine List</a></li>
+
                                    <li <?php if(get_page_name()=='Flight') print 'class="active"';?> ><a href       = "flight">Flight</a></li>
                                    <li <?php if(get_page_name()=='FlightAuth') print 'class="active"';?> ><a href   = "flightAuth">Authorize Flight</a></li>
+                                   <li <?php if(get_page_name()=='flightList') print 'class="active"';?> ><a href   = "flightList">Flight List</a></li>
+
                                    <li <?php if(get_page_name()=='Pcr') print 'class="active"';?> ><a href          = "pcr">PCR Test</a></li>
-                                   <li <?php if(get_page_name()=='PcrEdit') print 'class="active"';?> ><a href      = "pcrEdit">PCR Test Edit</a></li>
                                    <li <?php if(get_page_name()=='PcrAuth') print 'class="active"';?> ><a href      = "pcrAuth">Authorize PCR Test</a></li>
+                                   <li <?php if(get_page_name()=='PcrList') print 'class="active"';?> ><a href      = "pcrList">PCR Test List</a></li>
+
                                    <li <?php if(get_page_name()=='Mofa') print 'class="active"';?> ><a href         = "mofa">Mofa Entry</a></li>
                                    <li <?php if(get_page_name()=='MofaAuth') print 'class="active"';?> ><a href     = "mofaAuth">Authorize Mofa</a></li>
-                                   <li <?php if(get_page_name()=='MofaEdit') print 'class="active"';?> ><a href     = "mofaEdit">Edit Mofa</a></li>
+                                   <li <?php if(get_page_name()=='MofaList') print 'class="active"';?> ><a href     = "mofaList">Mofa List</a></li>
 
                             </ul>
                         </li>
