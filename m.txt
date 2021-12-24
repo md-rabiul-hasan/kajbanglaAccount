@@ -1,20 +1,7 @@
-UPDATE passenger SET 
-                    passenger_name     = 'Byron Gallegos',
-                    passport_no        = 'Non do modi dolor ar',
-                    passport_issue_dt  = '2021-12-08',
-                    passport_expire_dt = '2021-12-08',
-                    father_name        = 'Holly Heath',
-                    mother_name        = 'Iona Mcdaniel',
-                    date_of_birth      = '1982-01-26',
-                    place_of_birth     = 'Explicabo Quibusdam',
-                    phone_no           = '+1 (284) 296-4146',
-                    email              = 'hajubo@mailinator.com',
-                    reference_agent_id = '12',
-                    present_address    = 'Voluptates enim quia',
-                    parmanent_address  = 'Enim tempore ullam ',
-                    passenger_img      = 'uploads/passengers/20211221002400.jpg',
-                    passport_img       = 'uploads/passports/20211221002400.jpg',
-                    entry_by           = '1',
-                    entry_dt           = '2021-12-21',
-                    status             = 0
-              WHERE passenger_id       = '11'
+UPDATE pc SET 
+          passport_no = '3245698541',
+          police_c_no = 'Nazrul',
+          entry_by_pc = '3',
+          entry_dt_pc = '2021-12-25',
+          status      = '0'
+    where pc_id       = '1'

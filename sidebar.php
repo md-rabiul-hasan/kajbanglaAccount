@@ -179,11 +179,7 @@
                                     <li <?php if(get_page_name()=='authNewPassportReceived') print 'class="active"';?> ><a href="authNewPassportReceived">Authorize New Passport Received</a></li>
                                     <li <?php if(get_page_name()=='passportReceivedList') print 'class="active"';?> ><a href="passportReceivedList">Passport Received List</a></li>
                                 
-                                    <li <?php if(get_page_name()=='AuthNewProfession') print 'class="active"';?> ><a href="authNewProfession">Authorize New Profession</a></li>
-                               
-                                <li <?php if(get_page_name()=='EditNewCompany') print 'class="active"';?>>
-                                    <a href="editNewCompany">Edit Company Info</a>
-                                </li>
+                                  
 
                             </ul>
                         </li>
@@ -191,31 +187,32 @@
                             <a href="#">Process Entry<span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 
-                                   <li <?php if(get_page_name()=='Medical') print 'class="active"';?> ><a href="medical">Medical</a></li>
-                                     <li <?php if(get_page_name()=='MedicalAuth') print 'class="active"';?> ><a href="medicalAuth">Authorize Medical</a></li>
-                                    <li <?php if(get_page_name()=='MedicalEdit') print 'class="active"';?> ><a href="medicalEdit">Edit Medical</a></li>
-                                    <li <?php if(get_page_name()=='Sales') print 'class="active"';?> ><a href="sales">Sales</a></li>
-                               <li <?php if(get_page_name()=='SalesAuth') print 'class="active"';?> ><a href="salesAuth">Authorize Sales</a></li>
-                                <li <?php if(get_page_name()=='Pc') print 'class="active"';?>><a href="pc">Police Clearance</a>
-                                     <li <?php if(get_page_name()=='PcAuth') print 'class="active"';?>><a href="pcAuth">Authorize Police Clearance</a></li>
-                                    <li <?php if(get_page_name()=='Visa') print 'class="active"';?> ><a href="visa">Visa Process</a></li>
-                                    <li <?php if(get_page_name()=='VisaAuth') print 'class="active"';?>><a href="visaAuth">Authorize Visa</a>
-                                    <li <?php if(get_page_name()=='Training') print 'class="active"';?> ><a href="training">Training+Finger</a></li>
-                                     <li <?php if(get_page_name()=='TrainingAuth') print 'class="active"';?>><a href="trainingAuth">Authorize Training+Finger</a></li>
-                                     <li <?php if(get_page_name()=='TrainingEdit') print 'class="active"';?>><a href="trainingEdit">Edit Training+Finger</a></li>
-                                    <li <?php if(get_page_name()=='ManPower') print 'class="active"';?> ><a href="manPower">Man Power</a></li>
-                                    <li <?php if(get_page_name()=='ManPowerAuth') print 'class="active"';?> ><a href="manPowerAuth">Authorize Man Power</a></li>
-                                    <li <?php if(get_page_name()=='Vaccine') print 'class="active"';?> ><a href="vaccine">Vaccine</a></li>
-                                    <li <?php if(get_page_name()=='VaccineEdit') print 'class="active"';?> ><a href="vaccineEdit">Vaccine Edit</a></li>
-                                    <li <?php if(get_page_name()=='VaccineAuth') print 'class="active"';?> ><a href="vaccineAuth">Authorize Vaccine</a></li>
-                                    <li <?php if(get_page_name()=='Flight') print 'class="active"';?> ><a href="flight">Flight</a></li>
-                                    <li <?php if(get_page_name()=='FlightAuth') print 'class="active"';?> ><a href="flightAuth">Authorize Flight</a></li>
-                                    <li <?php if(get_page_name()=='Pcr') print 'class="active"';?> ><a href="pcr">PCR Test</a></li>
-                                     <li <?php if(get_page_name()=='PcrEdit') print 'class="active"';?> ><a href="pcrEdit">PCR Test Edit</a></li>
-                                    <li <?php if(get_page_name()=='PcrAuth') print 'class="active"';?> ><a href="pcrAuth">Authorize PCR Test</a></li>
-                                    <li <?php if(get_page_name()=='Mofa') print 'class="active"';?> ><a href="mofa">Mofa Entry</a></li>
-                                     <li <?php if(get_page_name()=='MofaAuth') print 'class="active"';?> ><a href="mofaAuth">Authorize Mofa</a></li>
-                                     <li <?php if(get_page_name()=='MofaEdit') print 'class="active"';?> ><a href="mofaEdit">Edit Mofa</a></li>
+                                   <li <?php if(get_page_name()=='Medical') print 'class="active"';?> ><a href      = "medical">Medical</a></li>
+                                   <li <?php if(get_page_name()=='MedicalAuth') print 'class="active"';?> ><a href  = "medicalAuth">Authorize Medical</a></li>
+                                   <li <?php if(get_page_name()=='MedicalEdit') print 'class="active"';?> ><a href  = "medicalEdit">Edit Medical</a></li>
+                                   <li <?php if(get_page_name()=='Sales') print 'class="active"';?> ><a href        = "sales">Sales</a></li>
+                                   <li <?php if(get_page_name()=='SalesAuth') print 'class="active"';?> ><a href    = "salesAuth">Authorize Sales</a></li>
+                                   <li <?php if(get_page_name()=='Pc') print 'class="active"';?>><a href            = "pc">Police Clearance</a>
+                                   <li <?php if(get_page_name()=='PcAuth') print 'class="active"';?>><a href        = "pcAuth">Authorize Police Clearance</a></li>
+                                   <li <?php if(get_page_name()=='PcList') print 'class="active"';?>><a href        = "PcList">Police Clearance List</a></li>
+                                   <li <?php if(get_page_name()=='Visa') print 'class="active"';?> ><a href         = "visa">Visa Process</a></li>
+                                   <li <?php if(get_page_name()=='VisaAuth') print 'class="active"';?>><a href      = "visaAuth">Authorize Visa</a>
+                                   <li <?php if(get_page_name()=='Training') print 'class="active"';?> ><a href     = "training">Training+Finger</a></li>
+                                   <li <?php if(get_page_name()=='TrainingAuth') print 'class="active"';?>><a href  = "trainingAuth">Authorize Training+Finger</a></li>
+                                   <li <?php if(get_page_name()=='TrainingEdit') print 'class="active"';?>><a href  = "trainingEdit">Edit Training+Finger</a></li>
+                                   <li <?php if(get_page_name()=='ManPower') print 'class="active"';?> ><a href     = "manPower">Man Power</a></li>
+                                   <li <?php if(get_page_name()=='ManPowerAuth') print 'class="active"';?> ><a href = "manPowerAuth">Authorize Man Power</a></li>
+                                   <li <?php if(get_page_name()=='Vaccine') print 'class="active"';?> ><a href      = "vaccine">Vaccine</a></li>
+                                   <li <?php if(get_page_name()=='VaccineEdit') print 'class="active"';?> ><a href  = "vaccineEdit">Vaccine Edit</a></li>
+                                   <li <?php if(get_page_name()=='VaccineAuth') print 'class="active"';?> ><a href  = "vaccineAuth">Authorize Vaccine</a></li>
+                                   <li <?php if(get_page_name()=='Flight') print 'class="active"';?> ><a href       = "flight">Flight</a></li>
+                                   <li <?php if(get_page_name()=='FlightAuth') print 'class="active"';?> ><a href   = "flightAuth">Authorize Flight</a></li>
+                                   <li <?php if(get_page_name()=='Pcr') print 'class="active"';?> ><a href          = "pcr">PCR Test</a></li>
+                                   <li <?php if(get_page_name()=='PcrEdit') print 'class="active"';?> ><a href      = "pcrEdit">PCR Test Edit</a></li>
+                                   <li <?php if(get_page_name()=='PcrAuth') print 'class="active"';?> ><a href      = "pcrAuth">Authorize PCR Test</a></li>
+                                   <li <?php if(get_page_name()=='Mofa') print 'class="active"';?> ><a href         = "mofa">Mofa Entry</a></li>
+                                   <li <?php if(get_page_name()=='MofaAuth') print 'class="active"';?> ><a href     = "mofaAuth">Authorize Mofa</a></li>
+                                   <li <?php if(get_page_name()=='MofaEdit') print 'class="active"';?> ><a href     = "mofaEdit">Edit Mofa</a></li>
 
                             </ul>
                         </li>

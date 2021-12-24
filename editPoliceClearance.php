@@ -5,6 +5,11 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
     header("Location:login");
 }
 
+$pc_id = $_GET['pc_id'];
+$sql      = "SELECT * FROM `pc` WHERE pc_id = '$pc_id'";
+$query    = mysqli_query($con, $sql);
+$data     = mysqli_fetch_array($query);
+
 ?>
 <head>
     <!-- start -:- Datepicker3 CSS -->
@@ -27,7 +32,7 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
           <?php include('navbar.php');?>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Police Clearance Entry </h2>
+                    <h2>Police Clearance Modify </h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="index.html">Home</a>
@@ -36,7 +41,7 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                             <a>Police Clearance</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Police Clearance Entry Form</strong>
+                            <strong>Police Clearance Modify Form</strong>
                         </li>
                     </ol>
                 </div>
@@ -49,7 +54,7 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Police Clearance Entry Info </h5>
+                            <h5>Police Clearance Edit Info </h5>
                             
                         </div>
 
@@ -62,13 +67,13 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                     <div class="col-sm-12">
                                         <div class="row">
                                             <!-- <label class="col-sm-2 col-form-label">Office Name</label> -->
-                                            <div class="col-md-4 has-success"><input type="text" placeholder="Passport No" class="form-control" name="passport" id="passport" required="" onkeyup="getPassangerInfo(this.value)">
+                                            <div class="col-md-4 has-success"><input type="text" placeholder="Passport No" class="form-control" value="<?php echo $data['passport_no']; ?>" name="passport" id="passport" required="" onkeyup="getPassangerInfo(this.value)">
                                             <div style="color: red;display: none" id="passport_Div">*Passport No Can not be empty</div>
                                             <div style="color: red;display: none" id="passport_Div1">*Passport Not Found</div>
-                                            <input type="hidden" id="passport_check">
+                                            <input type="hidden" id="passport_check" value="1">
                                         </div>
                                             <!-- <label class="col-sm-2 col-form-label">Office RL No</label> -->
-                                            <div class="col-md-4 has-success"><input type="text" placeholder="Police Clearance No" class="form-control" name="pc_no" id="pc_no" required="" >
+                                            <div class="col-md-4 has-success"><input type="text" placeholder="Police Clearance No" class="form-control" value="<?php echo $data['police_c_no']; ?>" name="pc_no" id="pc_no" required="" >
                                                  <div style="color: red;display: none" id="pc_no_Div">*Police Clearance No Can not be empty</div>
                                                   
                                             </div>
@@ -77,6 +82,8 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                         </div>
                                     </div>
                                 </div>
+
+                                <input type="hidden" name="pc_id" id="pc_id" value="<?php echo $data['pc_id']; ?>">
                                
 
                                 
@@ -87,7 +94,7 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                 <div class="form-group row">
                                     <div class="col-sm-4 col-sm-offset-2">
                                         <!-- <button class="btn btn-danger btn-sm" type="submit">Cancel</button> -->
-                                        <input type="button" class="btn btn-primary btn-bg col-sm-12" id="register" value="Submit" name="register" onclick="submitForm()">
+                                        <input type="button" class="btn btn-primary btn-bg col-sm-12" id="register" value="Update" name="register" onclick="submitForm()">
                                     </div>
                                 </div>
                                  
@@ -198,9 +205,10 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
     function submitForm()
 {
     
-    var passport=document.getElementById('passport').value
-    var pc_no=document.getElementById('pc_no').value
-   var passport_check= document.getElementById('passport_check').value
+    var passport       = document.getElementById('passport').value
+    var pc_no          = document.getElementById('pc_no').value
+    var passport_check = document.getElementById('passport_check').value
+    var pc_id          = document.getElementById('pc_id').value
   
    
     
@@ -240,12 +248,11 @@ if(errorCheck==0)
 {
         $.ajax({  
         type: 'POST',  
-        url: 'pcEntry', 
+        url: 'pcUpdate', 
         data: {
-            passport : passport,
-            pc_no : pc_no,
-            
-            
+            passport: passport,
+            pc_no   : pc_no,
+            pc_id   : pc_id      
             
         },
         success: function(response) {
@@ -253,11 +260,11 @@ if(errorCheck==0)
            {
                 cuteAlert({
                       type: "success",
-                      title: "New Entry Registered. ",
-                      message: "Please Authorize the new Police Clearance  Entry",
+                      title: "Update Police Clearance",
+                      message: "Please Authorize the updated Police Clearance",
                       buttonText: "Okay"
                     }).then((e)=>{
-                         window.location.replace("pc");
+                         window.location.replace("PcList");
                         })
            }
            else
@@ -270,7 +277,7 @@ if(errorCheck==0)
                           message: "Sales And Purchase Not Completed Yet",
                           buttonText: "Okay"
                         }).then((e)=>{
-                               window.location.replace("pc");
+                               window.location.replace("PcList");
                             })
                 }
                 else
@@ -278,10 +285,10 @@ if(errorCheck==0)
                         cuteAlert({
                       type: "error",
                       title: "ERROR",
-                      message: "Police Clearance  Entry not Registered",
+                      message: "Police Clearance  updated failed",
                       buttonText: "Okay"
                     }).then((e)=>{
-                           window.location.replace("pc");
+                           window.location.replace("PcList");
                         })
                 }
            }
