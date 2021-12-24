@@ -207,6 +207,8 @@
                                    
                                    <li <?php if(get_page_name()=='ManPower') print 'class="active"';?> ><a href     = "manPower">Man Power</a></li>
                                    <li <?php if(get_page_name()=='ManPowerAuth') print 'class="active"';?> ><a href = "manPowerAuth">Authorize Man Power</a></li>
+                                   <li <?php if(get_page_name()=='manPowerList') print 'class="active"';?> ><a href = "manPowerList">Man Power List</a></li>
+                                   
                                    <li <?php if(get_page_name()=='Vaccine') print 'class="active"';?> ><a href      = "vaccine">Vaccine</a></li>
                                    <li <?php if(get_page_name()=='VaccineEdit') print 'class="active"';?> ><a href  = "vaccineEdit">Vaccine Edit</a></li>
                                    <li <?php if(get_page_name()=='VaccineAuth') print 'class="active"';?> ><a href  = "vaccineAuth">Authorize Vaccine</a></li>
