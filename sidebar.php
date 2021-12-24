@@ -175,9 +175,9 @@
                                     <li <?php if(get_page_name()=='AuthNewPassportPosition') print 'class="active"';?> ><a href="authNewPassportPosition">Authorize Passport Position</a></li>
                                     <li <?php if(get_page_name()=='PassportPositionList') print 'class="active"';?> ><a href="PassportPositionList">Passport Position List</a></li>
                                 
-                                    <li <?php if(get_page_name()=='AuthNewProfession') print 'class="active"';?> ><a href="authNewProfession">Authorize New Profession</a></li>
-                                    <li <?php if(get_page_name()=='PassportReceived') print 'class="active"';?> ><a href="passportReceived">Passport Received</a></li>
-                                <li <?php if(get_page_name()=='authNewPassportReceived') print 'class="active"';?> ><a href="authNewPassportReceived">Authorize New Passport Received</a></li>
+                                   <li <?php if(get_page_name()=='PassportReceived') print 'class="active"';?> ><a href="passportReceived">Passport Received</a></li>
+                                    <li <?php if(get_page_name()=='authNewPassportReceived') print 'class="active"';?> ><a href="authNewPassportReceived">Authorize New Passport Received</a></li>
+                                    <li <?php if(get_page_name()=='passportReceivedList') print 'class="active"';?> ><a href="passportReceivedList">Passport Received List</a></li>
                                 
                                     <li <?php if(get_page_name()=='AuthNewProfession') print 'class="active"';?> ><a href="authNewProfession">Authorize New Profession</a></li>
                                

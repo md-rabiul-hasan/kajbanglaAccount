@@ -5,7 +5,10 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
     header("Location:login");
 }
 
-
+$received_id = $_GET['received_id'];
+$sql         = "SELECT * FROM `passport_received` WHERE received_id='$received_id'";
+$query       = mysqli_query($con, $sql);
+$data        = mysqli_fetch_array($query);
 
 ?>
 <head>
@@ -29,16 +32,16 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
           <?php include('navbar.php');?>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Passport Received Entry </h2>
+                    <h2>Passport Received Edit </h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="index.html">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a>Passport Received</a>
+                            <a>Passport Received Edit</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Passport Received Entry Form</strong>
+                            <strong>Passport Received Edit Form</strong>
                         </li>
                     </ol>
                 </div>
@@ -51,7 +54,7 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Passport Received Entry Info </h5>
+                            <h5>Passport Received Edit Info </h5>
                             
                         </div>
 
@@ -61,20 +64,20 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                     <div class="col-sm-12">
                                         <div class="row">
                                             <!-- <label class="col-sm-2 col-form-label">Office Name</label> -->
-                                            <div class="col-md-4 has-success"><input type="text" placeholder="Passport No" class="form-control" name="passport" id="passport" required="" onkeyup="getPassangerInfo(this.value)">
+                                            <div class="col-md-4 has-success"><input type="text" placeholder="Passport No" class="form-control" value="<?php echo $data['passport_no']; ?>" name="passport" id="passport" required="" onkeyup="getPassangerInfo(this.value)">
                                             <div style="color: red;display: none" id="passport_Div">*Passport No Can not be empty</div>
                                             <div style="color: red;display: none" id="passport_Div1">*Passport Not Found</div>
-                                            <input type="hidden" id="passport_check">
+                                            <input type="hidden" id="passport_check" value="1">
                                         </div>
                                             <!-- <label class="col-sm-2 col-form-label">Office RL No</label> -->
-                                            <div class="col-md-4 has-success"><input type="text" placeholder="Bearer Name" class="form-control" name="bearer_name" id="bearer_name" required="" >
+                                            <div class="col-md-4 has-success"><input type="text" placeholder="Bearer Name" class="form-control" name="bearer_name" value="<?php echo $data['bearer_name']; ?>" id="bearer_name" required="" >
                                                  <div style="color: red;display: none" id="bearer_name_Div">*Bearer Name Can not be empty</div>
                                                   
                                             </div>
                                             <div class="col-sm-4">
                                             <div class="input-group date has-success">
                                                 
-                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" placeholder="Received Date" class="form-control datepicker" name="sub_dt" id="sub_dt" />
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" placeholder="Received Date" value="<?php echo $data['sub_dt']; ?>" class="form-control datepicker" name="sub_dt" id="sub_dt" />
                                                 <div style="color: red;display: none" id="sub_dt_Div">*Received Date Can not be empty</div>
                                             </div>
                                         </div>
@@ -86,12 +89,12 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                     <div class="col-sm-12">
 
                                         <div class="row">
-                                             <div class="col-md-4 has-success"><input type="text" placeholder="Office" class="form-control" name="office" id="office" required="" >
+                                             <div class="col-md-4 has-success"><input type="text" placeholder="Office" class="form-control" name="office" value="<?php echo $data['office']; ?>" id="office" required="" >
                                                  <div style="color: red;display: none" id="office_Div">*Office Can not be empty</div>
                                                   
                                             </div>  
                                              
-                                            <div class="col-md-4 has-success"><input type="text" placeholder="Remarks" class="form-control" name="remarks" id="remarks" required="" >
+                                            <div class="col-md-4 has-success"><input type="text" placeholder="Remarks" class="form-control" name="remarks" value="<?php echo $data['remarks']; ?>" id="remarks" required="" >
                                                  <div style="color: red;display: none" id="remarks_Div">*Remarks Can not be empty</div>
                                                   
                                             </div>
@@ -113,11 +116,12 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                                  <select class="select2_demo_2 form-control has-success" multiple="multiple" id="doc">
                                                     <?php
                                                         $qDoc=mysqli_query($con,"SELECT * FROM `passport_doc` where doc_id='1' order by doc_name asc");
+                                                        $doc_array = explode(",", $data['doc']);
                                                         while($dDoc=mysqli_fetch_array($qDoc))
                                                         {
                                                             $doc_name=$dDoc['doc_name']
                                                     ?> 
-                                                     <option value="<?php print  $doc_name; ?>"><?php print  $doc_name; ?></option>
+                                                     <option value="<?php print  $doc_name; ?>" <?php if(in_array($doc_name, $doc_array)){ echo "selected"; } ?> ><?php print  $doc_name; ?></option>
 
                                                     <?php 
                                                          }
@@ -132,6 +136,8 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                     
                                         
                                 </div>
+
+                                <input type="hidden" id="received_id" value="<?php echo $data['received_id']; ?>">
                                 
                                 
                                 <div class="hr-line-dashed"></div>
@@ -140,15 +146,16 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                 <div class="form-group row">
                                     <div class="col-sm-4 col-sm-offset-2">
                                         <!-- <button class="btn btn-danger btn-sm" type="submit">Cancel</button> -->
-                                        <input type="button" class="btn btn-primary btn-bg col-sm-12" id="register" value="Submit" name="register" onclick="submitForm()">
+                                        <input type="button" class="btn btn-primary btn-bg col-sm-12" id="register" value="Update" name="register" onclick="submitForm()">
                                     </div>
                                 </div>
                                  
                             </form>
                         </div>
                         <div id="dumpdata"></div>
-                        <div class="" id="showPassengerInfo" style="display: none;">
-                                                    <table>
+                        <div class="col-md-6" id="showPassengerInfo" style="display: none;">
+                        <br>
+                                                    <table class="table table-bordered bg-white">
                                                       <tr>
                                                         <th>Passanger </th>
                                                         <th>Info</th>
@@ -261,13 +268,14 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
     function submitForm()
 {
     
-    var passport=document.getElementById('passport').value
-    var passport_check=document.getElementById('passport_check').value
-    var bearer_name=document.getElementById('bearer_name').value
-   var sub_dt= document.getElementById('sub_dt').value
-   var office= document.getElementById('office').value
-   var remarks= document.getElementById('remarks').value
-    var doc = $('#doc').val(); 
+    var passport       = document.getElementById('passport').value
+    var passport_check = document.getElementById('passport_check').value
+    var bearer_name    = document.getElementById('bearer_name').value
+    var sub_dt         = document.getElementById('sub_dt').value
+    var office         = document.getElementById('office').value
+    var remarks        = document.getElementById('remarks').value
+    var received_id    = document.getElementById('received_id').value
+    var doc            = $('#doc').val();
    
     var errorCheck=0;
    if(passport=='')
@@ -341,27 +349,26 @@ if(errorCheck==0)
 {
         $.ajax({  
         type: 'POST',  
-        url: 'passportRecEntry', 
+        url: 'passportRecUpdate', 
         data: {
-            passport : passport,
-            bearer_name : bearer_name,
-            sub_dt : sub_dt,
-            office:office,
-            remarks:remarks,
-            doc:doc
-            
-            
+            passport   : passport,
+            bearer_name: bearer_name,
+            sub_dt     : sub_dt,
+            office     : office,
+            remarks    : remarks,
+            doc        : doc,
+            received_id: received_id
         },
         success: function(response) {
            if(response==1)
            {
                 cuteAlert({
                       type: "success",
-                      title: "New Entry Registered. ",
-                      message: "Please Authorize the new Passport Received Entry",
+                      title: "Update Passport Received",
+                      message: "Please Authorize the udpated Passport Received",
                       buttonText: "Okay"
                     }).then((e)=>{
-                         window.location.replace("passportReceived");
+                         window.location.replace("passportReceivedList");
                         })
            }
            else if(response==5)
@@ -372,7 +379,7 @@ if(errorCheck==0)
                   message: "Sales Entry Not Done yet",
                   buttonText: "Okay"
                 }).then((e)=>{
-                       window.location.replace("passportReceived");
+                       window.location.replace("passportReceivedList");
                     })
            }
            else
@@ -380,10 +387,10 @@ if(errorCheck==0)
                 cuteAlert({
                   type: "error",
                   title: "ERROR",
-                  message: "Passport Received Entry not Registered",
+                  message: "Passport Received Updated Failed",
                   buttonText: "Okay"
                 }).then((e)=>{
-                       window.location.replace("passportReceived");
+                       window.location.replace("passportReceivedList");
                     })
            }
           
