@@ -1,9 +1,1 @@
-UPDATE vaccine SET 
-                  passport_no     = '1234',
-                  vaccine_1_dt    = '2021-12-10',
-                  vaccine_2_dt    = '2021-12-30',
-                  vaccine_remarks = 'Sed atque sequi beat',
-                  status          = '0',
-                  entry_by_vac    = '3',
-                  entry_dt_vac    = '2021-12-25'
-            WHERE vaccine_id      = '3'
+INSERT INTO `transactions`(`account_type`, `office_id`, `agent_id`, `gl_id`, `transaction_type`, `amount`, `status`, `remarks`, `entry_by`, `entry_dt`) VALUES ('0','0','0','3','0','34524','0', 'fasdf', '1','2021-12-28')

@@ -43,14 +43,15 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                             
                         </div>
                         <div class="ibox-content">
-                            <form method="get">
+                            <form method="post" id="transactionSubmit">
                                 <div class="form-group row">
 
                                     <div class="col-sm-12">
 
                                         <div class="row">
                                              <div class="col-md-4 has-success">
-                                                <select class="select2_demo_1 form-control " required="" id="gl_type" onchange="showSubGl(this.value)">
+                                                <label for="">Select Income/Expenditure</label>
+                                                <select class="select2_demo_1 form-control " required="" id="gl_type" name="gl_type" onchange="showGlList(this.value)">
                                                     <option value="">--Select Type--</option>
                                                         <?php 
                                                         $qGlType=mysqli_query($con,"SELECT * FROM gl_type order by gl_type_id ASC");
@@ -68,103 +69,76 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
                                                 </select>
                                                  <div style="color: red;display: none" id="gl_typeDiv">*Gl Type Can not be empty</div>
                                             </div>  
+
+                                            <div class="col-md-4 has-success">
+                                                <label for="">Select GL</label>
+                                                <select class="select2_demo_1 form-control " required="" name="gl_id" id="gl_id">
+                                                    <option value="">--Select GL--</option>
+                                                </select>
+                                            </div> 
                                              
                                         </div>
 
                                     </div>
                                 </div>
-                                
+
+
                                 <div class="form-group row">
 
                                     <div class="col-sm-12">
 
-                                        <div class="row" style="display: none" id="showSubGlDiv">
-                                             <div class="col-md-4 has-success">
-                                                <select class="select2_demo_1 form-control " required="" id="gl_id" onchange="showAcEntry(this.value)">
-                                                    <option value="">--Select GL--</option>
-                                                        <?php 
-                                                        $qGl=mysqli_query($con,"SELECT * FROM gl_head where status='1' and gl_type='0' order by  gl_name DESC");
-                                                        while($dGl=mysqli_fetch_array($qGl))
-                                                        {
-                                                            $gl_id=$dGl['gl_id'];
-                                                            $gl_name=$dGl['gl_name'];
-                                                        ?>
-
-                                                              <option value="<?php print $gl_id;?>"><?php print $gl_name;?></option>
-
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                </select>
-                                            </div>  
-                                           <!--  <div class="col-md-4 has-success">
-                                                <select class="select2_demo_1 form-control" onselect="showSubGl(this.value)">
-                                                    <option value="1">Main GL</option>
-                                                     <option value="2">Sub GL</option>
-                                                        
-                                                </select>
-                                            </div> -->  
-                                        </div>
-                                        <div class="row" style="display: none" id="showSubGlDiv1">
-                                             <div class="col-md-4 has-success">
-                                                <select class="select2_demo_1 form-control " required="" id="gl_id" onchange="showAcEntry(this.value)">
-                                                    <option value="">--Select GL--</option>
-                                                        <?php 
-                                                        $qGl=mysqli_query($con,"SELECT * FROM gl_head where status='1'  and gl_type='1' order by  gl_name DESC");
-                                                        while($dGl=mysqli_fetch_array($qGl))
-                                                        {
-                                                            $gl_id=$dGl['gl_id'];
-                                                            $gl_name=$dGl['gl_name'];
-                                                        ?>
-
-                                                              <option value="<?php print $gl_id;?>"><?php print $gl_name;?></option>
-
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                </select>
-                                            </div>  
-                                           <!--  <div class="col-md-4 has-success">
-                                                <select class="select2_demo_1 form-control" onselect="showSubGl(this.value)">
-                                                    <option value="1">Main GL</option>
-                                                     <option value="2">Sub GL</option>
-                                                        
-                                                </select>
-                                            </div> -->  
-                                        </div>
-                                        <input type="hidden" name="gl_id_val" id="gl_id_val">
-                                        <div style="color: red;display: none" id="gl_idDiv">*Gl Can not be empty</div>
-                                      <div id="ac_info_div" style="display: none;"> 
-
-                                              <br>
-                                        <div class="form-group row">
-                                    <div class="col-sm-12">
                                         <div class="row">
-                                            <!-- <label class="col-sm-2 col-form-label">Office Name</label> -->
-                                            <div class="col-md-4 has-success"><input type="number" placeholder="Amount" class="form-control" name="amt" id="amt" required="">
-                                            <div style="color: red;display: none" id="amt_Div">*Amount Can not be empty</div>
+                                             <div class="col-md-4 has-success">
+                                                <label for="">Select Account Type</label>
+                                                <select class="select2_demo_1 form-control " required="" id="account_type" name="account_type" onchange="showOfficeType(this.value)">
+                                                    <option value="">--Select Account Type--</option>
+                                                    <option value="0">Kaj-Bangla</option>
+                                                    <option value="1">Office</option>
+                                                    <option value="2">Agent</option>                                                       
+                                                </select>
+                                                 <div style="color: red;display: none" id="gl_typeDiv">*Gl Type Can not be empty</div>
+                                            </div>  
+
+                                            <div class="col-md-4 has-success" id="select_office" require>
+                                                <label for="">Select Office</label>
+                                                <select class="select2_demo_1 form-control "  id="office_id"  name="office_id">
+                                                    <option value="">--Select Office--</option>
+                                                </select>
+                                            </div> 
+                                             
                                         </div>
-                                            <!-- <label class="col-sm-2 col-form-label">Office RL No</label> -->
-                                            <div class="col-md-4 has-success"><input type="text" placeholder="Remarks" class="form-control" name="remarks" id="remarks" required="" >
-                                                 <div style="color: red;display: none" id="remarks_Div">*Remarks Can not be empty</div>
-                                                  
-                                            </div>
-                                           
-                                        </div>
+
                                     </div>
                                 </div>
 
-                                      </div>
-                                        
+                                <div class="form-group row">
+
+                                    <div class="col-sm-12">
+
+                                        <div class="row">
+                                            <div class="col-md-4 has-success">
+                                                <label for="">Amount *</label>
+                                                <input type="number" placeholder="Amount" class="form-control" name="amt" id="amt" required="">
+                                                <div style="color: red;display: none" id="amt_Div">*Amount Can not be empty</div>
+                                            </div>
+                                            <!-- <label class="col-sm-2 col-form-label">Office RL No</label> -->
+                                            <div class="col-md-4 has-success">
+                                                <label for="">Remarks</label>
+                                                <input type="text" placeholder="Remarks" class="form-control" name="remarks" id="remarks" required="" >
+                                                 <div style="color: red;display: none" id="remarks_Div">*Remarks Can not be empty</div>                                                  
+                                            </div> 
+                                             
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="hr-line-dashed"></div>
+
                                 
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group row">
                                     <div class="col-sm-4 col-sm-offset-2">
                                         <!-- <button class="btn btn-danger btn-sm" type="submit">Cancel</button> -->
-                                        <input type="button" class="btn btn-primary btn-bg col-sm-12" id="register" value="Submit" name="register" onclick="submitForm()">
+                                        <input type="submit" class="btn btn-primary btn-bg col-sm-12" id="register" value="Submit" name="register" onclick="submitForm()">
                                     </div>
                                 </div>
                             </form>
@@ -176,42 +150,102 @@ if(!isset($_SESSION['user_id']) and empty($_SESSION['user_id']))
 
 <script type="text/javascript">
 
-    function showAcEntry(gl)
-    {
-      
-        if(gl=='')
-        {
-            document.getElementById('ac_info_div').style.display="none";
+    $("#select_office").hide();
+
+    function showGlList(gl_type){
+        if(gl_type != ''){
+            $.ajax({
+                type: 'POST',
+                url : 'transactionFindGl',
+                data: {
+                    "gl_type"   : gl_type,
+                },
+                beforeSend: function() {
+                    // loaderStart();
+                },
+                success: (data) => {
+                    $("#gl_id").empty().append(data);
+                },
+                error: function(data) {
+                   //  console.log(data);
+                },
+                complete: function() {
+                   // loaderEnd();
+                }
+            });
         }
-        else
-        {
-         document.getElementById('ac_info_div').style.display="block";
-         document.getElementById('gl_id_val').value=gl;
-        }
-        
     }
 
-    function showSubGl(opt)
-    {
-        var gl_type=document.getElementById('gl_type').value;
-        var glDiv=null;
 
-        if(opt==0)//expendeture
-        {
-            glDiv='showSubGlDiv';
-            glDiv1='showSubGlDiv1';
-            document.getElementById(glDiv).style.display="block";
-            document.getElementById(glDiv1).style.display="none";
+    function showOfficeType(office_type){
+        if(office_type != '' && office_type != '0'){
+            $.ajax({
+                type: 'POST',
+                url : 'transactionFindOffice',
+                data: {
+                    "office_type"   : office_type,
+                },
+                beforeSend: function() {
+                    // loaderStart();
+                },
+                success: (data) => {
+                    $("#select_office").show();
+                    $("#office_id").empty().append(data);
+                },
+                error: function(data) {
+                   //  console.log(data);
+                },
+                complete: function() {
+                   // loaderEnd();
+                }
+            });
+        }else{
+            $("#select_office").hide();
         }
-        else
-        {
-            glDiv='showSubGlDiv1';
-            glDiv1='showSubGlDiv';
-            document.getElementById(glDiv).style.display="block";
-            document.getElementById(glDiv1).style.display="none";
-        }
-        
     }
+
+    $('#transactionSubmit').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'transactionStore',
+            data: $('#transactionSubmit').serialize(),
+            beforeSend: function() {
+                // loaderStart();
+            },
+            success: (data) => {
+               var obj = JSON.parse(data);
+               if(obj.success === true){
+                    cuteAlert({
+                        type      : "success",
+                        title     : "Success",
+                        message   : obj.message,
+                        buttonText: "ok"
+                    }).then((e)=>{
+                        location.reload(true);
+                    });
+               }else{
+                    cuteAlert({
+                        type: "error",
+                        title: "Error",
+                        message: obj.message,
+                        buttonText: "Try Again"
+                    });
+               }               
+            },
+            error: function(data) {
+                console.log(data);
+            },
+            complete: function() {
+                loaderEnd();
+            }
+        });
+    });
+
+
+
+
+
     function submitForm()
 {
     
