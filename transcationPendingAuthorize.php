@@ -49,7 +49,7 @@ $user_id=$_SESSION['user_id'];
                                         <th>SL</th>
                                         <th>Account Type</th>
                                         <th>Transaction Type</th>
-                                        <th>DR_CR</th>
+                                        <!-- <th>DR_CR</th> -->
                                         <th>GL Name</th>
                                         <th>Office/Agent</th>
                                         <th>Amount</th>
@@ -93,7 +93,7 @@ $user_id=$_SESSION['user_id'];
                                             ?>
                                         </td>
                                         <td><?php print $d['type_name']?></td>
-                                        <td><?php print $d['dr_cr']?></td>
+                                        <!-- <td><?php // print $d['dr_cr']?></td> -->
                                         <td><?php print $d['gl_name']?></td>
                                        
                                         <td>

@@ -23,11 +23,14 @@
                         IN+
                     </div>
                 </li>
-                <?php $current_page =  getCurrentPageMenuInformation(); ?> 
-                <li>
-                    <a href="dashboard"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> <span class="fa arrow"></span></a>
+              
+                <!-- <li>
+                    <a href="dashboard"><i class="fa fa-th-large"></i> 
+                        <span class="nav-label">Dashboard</span> <span class="fa arrow"></span>
+                    </a>
                     
-                </li>
+                </li> -->
+                <?php $current_page =  getCurrentPageMenuInformation(); ?> 
                 <?php 
                     $menus = getMenus();
                     foreach($menus['parent_menu'] as $parent_menu){

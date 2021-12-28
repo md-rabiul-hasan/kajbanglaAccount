@@ -1,1 +1,1 @@
-SELECT * FROM menus WHERE status=2
+SELECT * FROM menus WHERE status=1

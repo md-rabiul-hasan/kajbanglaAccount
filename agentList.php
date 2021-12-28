@@ -67,7 +67,7 @@ $user_id=$_SESSION['user_id'];
                                       $q=mysqli_query($con,"SELECT *,ai.entry_dt as entry_dt FROM `agent_info` ai  
                                       left join users usr on ai.entry_by=usr.user_id 
                                       where ai.status='1' order by ai.agent_id DESC");
-                                      print 
+                                       
                                      
                                       $sl=0;
                                       while($d=mysqli_fetch_array($q))
